@@ -1,32 +1,47 @@
-import { Grid } from '@mui/material';
-import { Terminal } from 'xterm';
 import './App.css';
-import Editor from './components/Editor.js';
-import SearchAppBar from './components/SearchAppBar.js';
-import Console from './components/Console.js';
+import React, { useState } from 'react';
+import MainWithDrawer from './components/MainWithDrawer'
+import { ThemeProvider, createTheme } from '@mui/material'
 
-// import Term from './components/Term'
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+})
 
 
 function App() {
+  let [language, setLanguage] = useState("c")
+  let [code, setCode] = useState("")
+  let [error, setError] = useState("")
+  let url = `ws://localhost:8080/ws/${language}`
+  let [ws, setWs] = useState(null)
 
-  let xterm = new Terminal()
+  const connectWebsocket = () => {
+    let ws = new WebSocket(url)
+    ws.onopen = () => {
+      console.log(code)
+      ws.send(JSON.stringify({ code: code }))
+    }
+
+    setWs(ws)
+  }
 
   return (
-    <div className="App">
-      <SearchAppBar />
-      <Grid container style={{ height: "90vh" }} spacing={"5"}>
-        <Grid item md={6}>
-          <Editor xterm={xterm} />
-        </Grid>
-
-        <Grid item md={6}>
-          <Console xterm={xterm} />
-          {/* <Term xterm={xterm} /> */}
-        </Grid>
-      </Grid>
-
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div className="App" style={{ height: "100vh" }}>
+        <MainWithDrawer
+          code={code}
+          setCode={setCode}
+          language={language}
+          connectWebsocket={connectWebsocket}
+          error={error}
+          setError={setError}
+          ws={ws}
+          setLanguage={setLanguage}
+        />
+      </div>
+    </ThemeProvider>
   );
 }
 
