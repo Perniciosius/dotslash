@@ -20,8 +20,11 @@ function App() {
   const connectWebsocket = () => {
     let ws = new WebSocket(url)
     ws.onopen = () => {
-      console.log(code)
       ws.send(JSON.stringify({ code: code }))
+    }
+
+    ws.onclose = () => {
+      setWs(null)
     }
 
     setWs(ws)

@@ -3,10 +3,18 @@ import { PlayArrowRounded, StopRounded } from '@mui/icons-material'
 import { useState } from 'react'
 
 export default function RunStopButton(props) {
-  let { connectWebsocket, isWebsocketOpen, terminateWebsocket, ...other } = props
+  let { connectWebsocket, ws, ...other } = props
 
   let [variant, setVariant] = useState('circular')
   let display = variant === 'circular' ? 'none' : 'block`'
+
+  let isWebsocketOpen = ws && ws.readyState === ws.OPEN
+
+  const terminateWebsocket = () => {
+    if (isWebsocketOpen) {
+      ws.send(JSON.stringify({ interrupt: true }))
+    }
+  }
 
   if (!isWebsocketOpen) {
     return (

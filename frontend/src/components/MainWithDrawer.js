@@ -5,20 +5,21 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { UploadFileRounded } from '@mui/icons-material/';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Main from './Main'
+import SearchErrorButton from './SearchErrorButton'
 
 const drawerWidth = 240;
 
 export default function MainWithDrawer(props) {
-  const { window, setLanguage } = props;
+  const { window, setLanguage, language, error } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -43,24 +44,44 @@ export default function MainWithDrawer(props) {
       <List>
         {
           listItems.map((item, index) => (
-            <ListItem button key={index} onClick={() => setLanguage(item.value)}>
+            <ListItemButton
+              key={index}
+              onClick={() => setLanguage(item.value)}
+              selected={language === item.value}
+              sx={{
+                borderEndEndRadius: 10,
+                borderStartEndRadius: 10,
+                '&.Mui-selected': {
+                  backgroundColor: '#66b2ff'
+                },
+                '&.Mui-selected:hover': {
+                  backgroundColor: '#66b2ff'
+                }
+              }}>
               {/* <ListItemIcon> */}
               {/*   <InboxIcon /> */}
               {/* </ListItemIcon> */}
               <ListItemText primary={item.title} />
-            </ListItem>
+            </ListItemButton>
           ))
         }
       </List>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItemButton >
           <ListItemIcon>
-            <InboxIcon />
+            <UploadFileRounded />
           </ListItemIcon>
-          <ListItemText primary={"Upload Code"} />
-        </ListItem>
+          <ListItemText primary={"Upload Code Image"} />
+        </ListItemButton>
       </List>
+      <Divider />
+      <List
+        sx={{ display: error && error.length !== 0 ? 'block' : 'none' }}
+      >
+        <SearchErrorButton error={error} />
+      </List>
+
     </div>
   );
 
@@ -89,12 +110,12 @@ export default function MainWithDrawer(props) {
           <Typography variant="h6" noWrap component="div">
             DotSlash
           </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box border={"1px grey"}>
-            <Typography>
-              Search Error on
-            </Typography>
-          </Box>
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
+          {/* <Box border={"1px grey"}> */}
+          {/*   <Typography> */}
+          {/*     Search Error on */}
+          {/*   </Typography> */}
+          {/* </Box> */}
         </Toolbar>
       </AppBar>
       <Box
@@ -106,7 +127,7 @@ export default function MainWithDrawer(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', md: 'none' },
@@ -128,7 +149,8 @@ export default function MainWithDrawer(props) {
       </Box>
       <Box
         component="div"
-        sx={{ flexGrow: 1, p: 0, width: { md: `calc(100% - ${drawerWidth}px)` }}}
+        display={"flex"}
+        sx={{ flexGrow: 1, p: 0, pt: 10, width: { md: `calc(100% - ${drawerWidth}px)` }, height: "100vh", alignItems: 'stretch' }}
       >
         <Toolbar />
         <Main {...props} />
