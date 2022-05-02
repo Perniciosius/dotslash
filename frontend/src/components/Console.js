@@ -55,7 +55,7 @@ export default memo(function Console(props) {
           else if (data.server_error !== "")
             xterm.write(`\u001b[33m${data.server_error.replaceAll(/\n/g, "\r\n")}`)
           else
-            xterm.write(data.output.replaceAll(/\n/g, "\r\n"))
+            xterm.write(`\u001b[37m${data.output.replaceAll(/\n/g, "\r\n")}`)
         }
       }
     }
