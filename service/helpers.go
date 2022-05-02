@@ -28,24 +28,24 @@ func (l *Language) getCommand(body *WsBody) []string {
 	}
 
 	file := fmt.Sprintf("%v.%v", l.Filename, l.getExtension())
-	command := []string{}
+	command := []string{"bash", "-c"}
 	switch l.Name {
 	case "c":
-		command = append(command, "gcc", file, "-o", "main", "&&", "./main")
+		command = append(command, "gcc "+file+" -o "+"main"+" && "+"./main")
 	case "cpp":
-		command = append(command, "g++", file, "-o", "main", "&&", "./main")
+		command = append(command, "g++ "+file+" -o "+"main"+" && "+"./main")
 	case "golang":
-		command = append(command, "go", "run", file)
+		command = append(command, "go"+" run "+file)
 	case "java":
-		command = append(command, "javac", file, "&&", "java", l.Filename)
+		command = append(command, "javac "+file+" && "+" java "+l.Filename)
 	case "javascript":
-		command = append(command, "node", file)
+		command = append(command, "node "+file)
 	case "python2":
-		command = append(command, "python2", file)
+		command = append(command, "python2 "+file)
 	case "python3":
-		command = append(command, "python3", file)
+		command = append(command, "python3 "+file)
 	case "typescript":
-		command = append(command, "tsc", file, "&&", "node", l.Filename+".js")
+		command = append(command, "tsc "+file+" && "+"node "+l.Filename+".js")
 	}
 	return command
 }
