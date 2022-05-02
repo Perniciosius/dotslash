@@ -204,7 +204,7 @@ func (l *Language) Handler(c *websocket.Conn) {
 					break
 				}
 				if body.Input != "" {
-					input <- []byte(body.Input)
+					input <- []byte(body.Input + "\n")
 				}
 			}
 		}
