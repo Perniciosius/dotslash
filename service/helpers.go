@@ -70,3 +70,22 @@ func (l *Language) getExtension() string {
 		return ""
 	}
 }
+
+func (l *Language) getImage() string {
+	switch l.Name {
+	case "c", "cpp":
+		return "gcc"
+	case "golang":
+		return "golang"
+	case "java":
+		return "openjdk"
+	case "javascript":
+		return "node"
+	case "python2", "python3":
+		return "python"
+	case "typescript":
+		return "ts-node"
+	default:
+		return ""
+	}
+}

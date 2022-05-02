@@ -78,7 +78,7 @@ func (l *Language) Handler(c *websocket.Conn) {
 		AttachStderr: true,
 		OpenStdin:    true,
 		Tty:          false,
-		Image:        l.Name,
+		Image:        l.getImage(),
 		WorkingDir:   "/work",
 		Cmd:          l.getCommand(body),
 	}, &container.HostConfig{
