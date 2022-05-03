@@ -32,8 +32,7 @@ export default function MainWithDrawer(props) {
     { title: "Golang", value: "golang" },
     { title: "Java", value: "java" },
     { title: "Javascript", value: "javascript" },
-    { title: "Python 2", value: "python2" },
-    { title: "Python 3", value: "python3" },
+    { title: "Python", value: "python" },
     { title: "Typescript", value: "typescript" },
   ]
 

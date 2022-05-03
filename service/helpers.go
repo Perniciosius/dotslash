@@ -40,10 +40,8 @@ func (l *Language) getCommand(body *WsBody) []string {
 		command = append(command, "javac "+file+" && "+" java "+l.Filename)
 	case "javascript":
 		command = append(command, "node "+file)
-	case "python2":
-		command = append(command, "python2 "+file)
-	case "python3":
-		command = append(command, "python3 "+file)
+	case "python":
+		command = append(command, "python "+file)
 	case "typescript":
 		command = append(command, "tsc "+file+" && "+"node "+l.Filename+".js")
 	}
@@ -62,7 +60,7 @@ func (l *Language) getExtension() string {
 		return "java"
 	case "javascript":
 		return "js"
-	case "python2", "python3":
+	case "python":
 		return "py"
 	case "typescript":
 		return "ts"
@@ -81,7 +79,7 @@ func (l *Language) getImage() string {
 		return "openjdk"
 	case "javascript":
 		return "node"
-	case "python2", "python3":
+	case "python":
 		return "python"
 	case "typescript":
 		return "ts-node"
