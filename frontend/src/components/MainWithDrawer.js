@@ -58,9 +58,6 @@ export default function MainWithDrawer(props) {
                   backgroundColor: '#66b2ff'
                 }
               }}>
-              {/* <ListItemIcon> */}
-              {/*   <InboxIcon /> */}
-              {/* </ListItemIcon> */}
               <ListItemText primary={item.title} />
             </ListItemButton>
           ))
@@ -68,12 +65,6 @@ export default function MainWithDrawer(props) {
       </List>
       <Divider />
       <List>
-        {/* <ListItemButton > */}
-        {/*   <ListItemIcon> */}
-        {/*     <UploadFileRounded /> */}
-        {/*   </ListItemIcon> */}
-        {/*   <ListItemText primary={"Upload Code Image"} /> */}
-        {/* </ListItemButton> */}
         <UploadCodeImage setCode={setCode} />
         <Divider />
         <ListItem>
@@ -115,12 +106,6 @@ export default function MainWithDrawer(props) {
           <Typography variant="h6" noWrap component="div">
             DotSlash
           </Typography>
-          {/* <Box sx={{ flexGrow: 1 }} /> */}
-          {/* <Box border={"1px grey"}> */}
-          {/*   <Typography> */}
-          {/*     Search Error on */}
-          {/*   </Typography> */}
-          {/* </Box> */}
         </Toolbar>
       </AppBar>
       <Box
