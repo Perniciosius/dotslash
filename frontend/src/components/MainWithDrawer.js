@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Main from './Main'
 import SearchErrorButton from './SearchErrorButton'
 import UploadCodeImage from './UploadCodeImage'
+import { ListItem } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -74,6 +75,10 @@ export default function MainWithDrawer(props) {
         {/*   <ListItemText primary={"Upload Code Image"} /> */}
         {/* </ListItemButton> */}
         <UploadCodeImage setCode={setCode} />
+        <Divider />
+        <ListItem>
+          <ListItemText secondary='Press Ctrl + Shift + B to format code' />
+        </ListItem>
       </List>
       <Divider />
       <List
