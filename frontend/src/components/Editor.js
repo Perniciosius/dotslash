@@ -51,8 +51,7 @@ const getMode = (language) => {
       return "java"
     case "javascript":
       return "javascript"
-    case "python2":
-    case "python3":
+    case "python":
       return "python"
     case "typescript":
       return "typescript"
