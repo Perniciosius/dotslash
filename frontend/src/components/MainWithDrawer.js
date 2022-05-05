@@ -12,9 +12,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Main from './Main'
+import MobileMain from './MobileMain'
 import SearchErrorButton from './SearchErrorButton'
 import UploadCodeImage from './UploadCodeImage'
-import { ListItem } from '@mui/material';
+import { ListItem, useMediaQuery } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -35,6 +36,8 @@ export default function MainWithDrawer(props) {
     { title: "Python", value: "python" },
     { title: "Typescript", value: "typescript" },
   ]
+
+  const md = useMediaQuery((theme) => theme.breakpoints.up('md'))
 
   const drawer = (
     <div>
@@ -108,7 +111,7 @@ export default function MainWithDrawer(props) {
         </Toolbar>
       </AppBar>
       <Box
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
       >
         <Drawer
           container={container}
@@ -142,7 +145,12 @@ export default function MainWithDrawer(props) {
         sx={{ flexGrow: 1, p: 0, pt: 10, width: { md: `calc(100% - ${drawerWidth}px)` }, height: "100vh", alignItems: 'stretch' }}
       >
         <Toolbar />
-        <Main {...props} />
+        {
+          (md) ?
+            <Main {...props} />
+            :
+            <MobileMain {...props} />
+        }
       </Box>
     </Box>
   );
